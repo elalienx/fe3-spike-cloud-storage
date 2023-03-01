@@ -1,18 +1,15 @@
 // Project files
+import { useState } from "react";
 import { downloadFile, uploadFile } from "./scripts/cloudStorage";
 
 export default function App() {
+  const [imageToUpload, setImageToUpload] = useState("");
   // Methods
   async function onChange(event) {
     const file = event.target.files[0];
     const filePath = `new-folder/${Date.now()}_${file.name}`;
-    let url = "";
 
-    await uploadFile(file, filePath);
-    url = await downloadFile(filePath);
-
-    console.log("From React url", url);
-    console.log(Date.now());
+    setImageToUpload(file);
   }
 
   return (
